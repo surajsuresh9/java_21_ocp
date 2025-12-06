@@ -166,3 +166,441 @@ if-else
 ternary ?:
 
 switch
+
+
+Stack and Heap
+--------------
+Stack
+- It is an area of memeory used at program runtime
+- holds method execution, local variables + primitive data types & ref vars
+- physical space in RAM, allocated to each Thread at runtime
+- LIFO
+- throws StackOverFlowError
+
+Heap
+- It is an area of memeory that is allocated dynamically 
+  at program runtime
+- holds instance vars and objects and ref types
+- no specific order
+- throws OutOfMemoryError
+
+static keyword
+--------------
+variables
+class methods
+interface methods
+block
+class
+import
+
+static method: 
+- belongs to class, not an instance of the class (object)
+- no need to create an object
+- call it using ClassName.staticMethod();
+
+static variables:
+- belongs to class, not an instance of the class (object)
+- no need to create an object
+- use it by invoking ClassName.staticVariable;
+
+static import
+-------------
+- use method without class name
+	before 
+	------
+		Math.pow()
+		Math.min()
+		Math.max()
+	after
+	-----	
+	import static Math.pow;
+	import static Math.min;
+	import static Math.max;
+	import static Math.*;
+	pow();
+	min();
+	max();
+	
+Nested class
+-----------
+Nested class	
+	non-static nested/ inner class
+		- can access all members and methods (static and non-static) of the outer class
+		- can access private vars of the outer class		
+		- types of inner classes :
+			anonymous class
+			local class
+				- the scope of the local class is retricted to the block they are defined in
+				- a local class cannot be instantiated from outside the block where it is created in
+				- from jdk 8, its possible to access non-final local variable of enclosing block in the local class	
+				- has access to the members of its enclosing class		
+				- they are non static as they have to access instance members of enclosing block
+				- from JDK8, a local class inside a method can access method params
+	static nested class
+	- cannot access non static members of outer class 
+	- can access only static members of outer class 
+	- access members not very important	
+	
+	
+Inheritance
+-----------
+- all classes can inherit methods, variables from another class
+- subclass (derived, extended, child class)
+- superclass (base, parent class)
+- except Object, every class has 1 and only 1 direct superclass
+- in absence of explicit superclass, evey class is implicitly a subclass of Object
+- a subclass inherits all memebers (fields, methods, and nested classes) from its superclass
+- constructors aren't members, so they aren't inherited
+- Object is the most general of all classes
+
+- - A subclass inherits all public and protected members of its parent
+-   inherited fields can be used like any other fields
+- - you can declare a field in the subclass with the same name as the aprent, this field 
+    hides the supercalss field
+  - inherited methods can be used directly as they are
+  - you can override superclass methods in subclass 
+  
+  
+Types of Inheritance
+--------------------
+- single inheritance
+
+	class  RoadBike extends Bicycle
+	
+- multilevel inheritance
+
+	class Bicycle extends Vehicle
+	class RoadBike extends Bicycle
+
+- hierarchial inheritance
+
+	class RoadBike extends Bicycle
+	class MountainBike extends Bicycle
+	class TabdemBike extends Bicycle
+
+- multiple inheritance (not supported in classes)
+	only in interfaces, Java doesn't support in classes
+	
+- hybrid inheritance (not supported in classes)
+	only in interfaces, Java doesn't support in classes
+	
+Sealed classes
+---------------
+- introduced in jdk15	
+- restrict which classes can extend a class
+- provied more granular control in inheritance
+- sealed ClassA permits ClassB,ClassC,ClassD
+- public, final, sealed, non-sealed
+
+method overriding
+-----------------
+- if methods have same name but different params length - method overloading
+- a method in a subclass that is already defined in the superclass with the 
+	- same name
+	- same paramters
+	- same return type
+	
+this
+----
+- this can be used to refer to current class instance variable
+- can be used to invoke the current class method (implicitly)
+- can be used to invodke current class constructor
+- can be passed as an argument in the method call
+- can be passed as an argument in the constructor call
+- can be used to return teh current class instance from the method
+
+super
+-----
+- this refers to the class its in
+- super referes to the supercalss it inherits
+- this references the constrcutors of its class
+- super references the constrcutors of the superclass it inherits
+
+final
+-----
+- final class
+	Cannot be extended
+- final method
+	Cannot be extended
+- final variable (Constant)
+	Cannot be altered
+	
+	
+Abstraction
+-----------
+abstract class
+--------------
+- It serves as a blueprint for other classes, providing common functionality 
+  and defining abstract methods that must be implemented by its subclasses
+- Cannot be instantiated
+- May contain abstract methods
+- May contain concrete methods
+- Subclasses must implement abstract methods or be declared abstract themselves  
+- Can have constructors, fields, and static/final methods
+- can have final methods, they must be concrete
+- can have all non abstract methods
+- abstract methods can't be private or final
+-  abstract method may not be declared as static
+
+Interface
+---------
+- mechanism to achieve abstraction
+- can only have constrcutors and methods without a body
+- a java class can implement multiple interfaces
+- cannot instantiate an interface
+- doesn't contain any constructors
+- can't be extended by a class
+- can be inherited from another interface
+- common behaviors that can be implemented by classes
+- cannot have a method body
+- represents a IS-A relationship
+- can have methods and variables
+
+Polymorphism (implicit casting)
+-------------
+static polymorphism: method overloading
+dynamic polymorphism: method overriding
+
+Encapsulation
+--------------
+private fields
+hide data from outside world
+use getters/ setters
+
+
+Anonymous Classes
+-----------------
+don't need a class for implementing an interface
+implementation can be provided with an anonymous class
+
+Records
+-------
+- part of JDK 16
+- simple template based class
+- used to create immutable data containers
+- contains only data fields and methods to access these fields
+- automatically generates hashCode(), equals(), toString()
+- substitute for POJOs 
+- provides a simple and more readable way to create data containers
+
+public record Person(String name, int age){}
+
+
+var keyword
+------------
+- introduced in JDK 10
+- supports local variable type inference (LVTI)
+- can use var to declare variables used in methods or blocks
+- can't be used for class variables
+- can't be used in method params or return types
+- requires an initializer
+- can't assign null without explicit type
+- can't be used for lambda expressions
+
+Wrapper Classes
+---------------
+Primitive			Wrapper
+---------------------------
+byte				Byte
+short				Short
+int 				Integer
+long				Long
+float				Float
+double				Double
+boolean				Boolean
+char				Character
+
+
+primitive -> wrapper
+-------------------
+- use constructors
+	Integer i1 = new Integer(20);
+
+- use static methods
+	Integer i2 = Integer.valueOf(20);
+
+
+wrapper -> primitive
+--------------------
+	Integer i1 = new Integer(20);
+	int val = i1.intValue();
+	
+automatic conversion from primitive to wrapper - autoboxing
+the reverse is autounboxing	
+
+Strings
+-------
+- present in java.lang, not need of explicit import
+
+equality
+--------
+String pool
+------------
+String literal
+- all literals are placed in the string pool
+- if a literal of the same value is already present in the SCP,
+  then the newly created literal references that SCP string
+  
+ e.g: String s1="Java"; // newly creates string in SCP 
+	  String s2="Java"; // references the already existing string in SCP 
+	  String s3="Android"; // new string created in SCP	
+	  
+String object
+------------
+- all objects are placed in the heap memeory
+	  // this craetes a new String object regardless of whether the same string was already present in the SCP	
+      String s4 = new String("Hello"); 
+
+Immutability of Strings
+-----------------------
+- you can't change the object itself, but you can change the reference to the object	
+- string objects are immuatble  
+- once a string object is created its data or state can't be changed but a new 
+  string object is created
+  
+  String msg="Hello";
+  msg.concat("World");
+  sout(msg); // Hello
+  msg = msg.concat("World");
+  sout(msg); // Hello World
+  
+useful methods in String class
+------------------------------  
+toUpperCase(): returns a string in uppercase
+toLowerCase(): returns a string in lowercase
+concat(String s): Adds the string "s" to the end of the other string
+isEmpty(): checks the length of string, returns true if len=0 else false
+equals(Object another): comapres 2 string if they have the same contecnt returns true
+substring(int beginIdx): return substring for given index
+length(): returns length of string
+charAt(int idx): return char value for the particular index
+indexOf(String s):returns index of given string
+equalsIgnoewCase(String s): same as equals,but ignores the case
+startsWith(String s): returns true if the string its applied to starts with "s", else false
+endsWith(String s): returns true if the string its applied to ends with "s", else false
+contains(String s): returns true if the string its applied to contains the given string "s", else false
+trim(): removes leading and trailing spaces from the string to which its applied
+
+StringBuffer
+------------
+- same as String, except its mutable
+- thread safe (slower)
+StringBuffer sb=new StringBuffer("Java");
+sb.appen(" Program");
+sout(sb); // Java Program
+
+StringBuilder
+-------------
+- same as StringBuffer
+- its NOT thread safe (faster)
+
+---------------------------------------------------------------
+			|	String		StringBuffer		StringBuilder
+---------------------------------------------------------------
+Storage Area|	SCP				Heap				Heap			
+Modifiable	|	no				yes					yes
+Performance	|	fast			slow				fast
+---------------------------------------------------------------
+
+Collections
+-----------
+- a collection is simply an object that groups multiple elements into a single unit
+- collections are used to store, retrieve, manipulate and communicate aggregate data
+- they have ready made methods
+- reduces programming efforts
+- increases program speed and quality
+- allows interoperability b/w unrealeted APIs
+
+	array 			vs		 collection
+-------------------------------------------
+- fixed in size				dynamic size
+
+
+Interfaces
+----------
+Collection
+	List
+	Set
+		SortedSet
+	Queue
+	Deque
+	
+Classes
+-------
+List
+	ArrayList
+	LinkedList
+	Vector
+	Stack
+Set
+	HashSet
+	LinkedHashSet
+	TreeMap
+Queue (FIFO)	
+	ProrityQueue (based on priority, natural order)
+Deque	(FIFO, LIFO) both ends
+	ArrayDeque
+		
+List Interface
+---------------
+- preserves insertion order
+- allows random access
+- just like arrays, but dynamic
+- e.g: ArrayList, LinkedList
+
+useful methods
+--------------
+add()
+remove()
+size()
+set()
+isEmpty()
+contains()
+clear()
+
+List to Array conversion
+-------------------------
+list.toArray()
+list.toArray(T[]a)
+
+Array to List conversion
+-------------------------
+Arrays.asList(arr)
+Collections.addAll(list,arr)
+
+Iterators
+--------
+- an Iterator is a Java cursor
+- Java iterator is an interface
+- used to iterate, traverse, or retrieve a Collection or Stream object's element one by one
+- belongs to java.util package
+- perform read/ remove operation
+- available for entire collections framework
+
+listiterator
+------------
+important methods
+-----------
+next()
+hasNext()
+previous()
+hasPrevious()
+previousIndex()/ nextIndex()
+set()
+add()
+
+Set
+---
+- unpredictable order
+- no duplicates
+- only 1 null elements
+
+LinkedHashSet
+------------
+- same as set
+- maintains insertion order
+
+TreeSet
+-------
+- same as set
+- maintains ascending order
