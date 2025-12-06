@@ -540,6 +540,14 @@ Queue (FIFO)
 	ProrityQueue (based on priority, natural order)
 Deque	(FIFO, LIFO) both ends
 	ArrayDeque
+	
+Map(I)
+	- not a collection
+	- doesn't have methods of Collection(I), holds (k,v) pairs
+	- classes	
+		HashMap
+		LinkedHashMap
+		TreeMap
 		
 List Interface
 ---------------
@@ -604,3 +612,42 @@ TreeSet
 -------
 - same as set
 - maintains ascending order
+
+Queue
+-----
+- used to insert elements in FIFO order
+- Queue(I)
+		PriorityQueue
+	Deque(I)	
+		LinkedList
+		
+Deque (Doubley eneded queue) (I)
+-----		
+- add/ remove el from both ends of the queue
+- FIFO/ LIFO can be applied
+- classess: ArrayDeque LinkedList
+
+Map
+---
+HashMap
+-------
+- no insertion order preserved
+- 1 null key, multiple null values
+
+LinkedHashMap
+-------------
+- insertion order preserved
+- 1 null key, multiple null values
+
+TreeMap
+-------
+- maintains natural order/ Compartaor sorting order
+- stores based on SORTED KEYS
+- no null keys, multiple null values
+- no duplicate values
+
+Exception Handling
+------------------
+- exception: sepcial type of error
+- it occurs while executing the pgm
+- if not handled, the pgm can be terminated abruptly
