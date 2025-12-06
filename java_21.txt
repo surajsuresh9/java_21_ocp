@@ -1,0 +1,168 @@
+Java 21 (1Z0-830)
+-----------------
+
+Variables
+---------
+instance
+static
+local
+
+Data Types
+----------
+Primitive
+
+Boolean
+	boolean - 1 byte (8 bits), [default: false]
+
+Numeric
+	Character
+		char - 2 byte (16 bits), [default: '\u0000'= 0 (ASCII)]
+	Integral
+		Integer
+			byte - 1 byte (8 bits), [default: 0] 
+			short - 2 bytes (16 bits), [default: 0]
+			int - 4 byte (32 bits), [default: 0]
+			long - 8 bytes (64 bits),[default: 0L]
+		Floating Point
+			float - 4 byte (32 bits), [default: 0.0f]
+			double - 8 byte (64 bits), [default: 0.0d]
+
+Non Primitive
+class, enum, interface, string, array 
+
+
+Numbers
+-------
+Decimal -  13 					// 13
+Binary  - 0b1101 				// 13
+Octal - (0-7) - 015 			// 13
+Hexadecimal - (0-9 - A-F) - 0xD	// 13  	
+
+
+Type Conversion
+---------------
+Smaller to Larger - OK
+
+        double a;
+        int b = 20;
+        a = b;
+        System.out.println(a); //20.0
+		
+		automatically converted to double
+		
+Larger to smaller data type (explicit type casting)		
+
+		double a = 20;
+		int b;
+		b = a;
+- This conversion can't be performed automatically 
+  as double is bigger than int
+- To solve this, we need explicit type casting
+  b = (int) a; // type casting
+		
+	types need to be made compatible	
+		
+Operators
+---------
+5+4
+
+5,4 -> operands
++ -> operator		
+		
+Arithmetic Operators
+--------------------
++, -, *, /, %
+
+Assignment Operators (assign RHS to LHS)
+--------------------
+=, +=, -=, *=, /=, %=		
+
+Unary Operators (require only one operand)
+---------------
++, -, ++, --, !
+
+Equality and Relational Operators (check if 2 operands are equal)
+---------------------------------
+==, !=, >, <, >=, <=
+
+Conditional operators (checking multiple conditions together)
+---------------------
+&&, ||, ?:
+
+Bitwise and BitShift Operators
+------------------------------
+& AND
+| INCLUSIVE OR
+^ EXCLUSIVE OR (both different = 1, both same = 0)
+~ NOT Compliment ~0000 = 1111 
+<< x Left shift operator (pointing left)  shift bits to the left (x times)
+>> x Right shift operator (pointing left) shift bits to the right (x times)
+
+char
+----
+we can store only 1 digit for char data type,
+each char has an integer equivalent (use ASCII table)	
+
+
+Expressions/ Statements/ Blocks
+-------------------------------
+expressions make up statements
+statements always end in a semi-colon ;
+blocks are made up of statements enclosed in {}
+
+Arrays
+------
+int[] nums; //preferred
+int nums[];
+
+int[] nums = new int[];
+
+initialization
+--------------
+int[] nums = {1,2,3,4,5};
+int[] nums = new int[]{1,2,3,4,5};
+int[] nums = new int[5]; // fixed, can't be changed later
+
+access
+-------
+nums[2] // 3 3rd element in array
+
+sort
+----
+int[]arr={3,4,5,1,2};
+Arrays.sort(arr);
+
+searching
+---------
+int[]arr={3,4,5,1,2};
+Arrays.binarySearch(arr,5);
+
+if array is sorted, 
+	if num is present in arr => o/p : idx of num
+	if num is NOT present in arr => o/p : negative value order of num in arr
+if arr is NOT sorted	
+	o/p : unpredictable
+	
+multi dimensional array
+-----------------------
+2D arrays
+----------
+int[][] nums=new int[3][4]
+// [rows][cols]
+
+int nums={{1,2,3,4},{5,6,7,8},{9,10,11,12}};
+
+
+Decision making statements
+--------------------------
+if-else
+	if 
+		if(condition){}
+	if else
+		if(condition){}else{}
+	if else if ladder
+		if(){}else if(){} else if(){} else{}
+
+ternary ?:
+
+switch
