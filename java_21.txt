@@ -651,3 +651,194 @@ Exception Handling
 - exception: sepcial type of error
 - it occurs while executing the pgm
 - if not handled, the pgm can be terminated abruptly
+
+		Error 				 							Exception
+- In java.error pkg								- In java.exception pkg
+- lacking system resources						- because of code
+- imposiible to recover							- possible using try-catch block
+- classified as unchecked type					- classified as checked/ unchecked type
+- StackOverflowError, OutOfMemoryError			- FileNotFoundException, NullPointerException
+
+Exception hierarchy
+--------------------
+Object
+	|
+Throwable
+	|----------------------------------------
+	|										|
+Exception						 		  Error	
+	|		    						  
+    |------------
+	|			|
+Bult-in   	user defined
+	|
+	|----------------	
+	|				|
+Checked				Unchecked
+	
+Exception Types	
+---------------
+Checked Exceptions
+	- checked at compile time 
+	- compile time exception
+	- FileNotFoundException
+
+Unhecked Exceptions
+	- checked at runtime
+	- runtime exception
+	- StackOverFlowError
+
+User defined Exception
+	- custom exceptions/ user defined exception
+	- AccountNotFoundException
+
+throw
+-----
+- throw an exception explicitly
+
+throws
+------
+- use in method defintion to indicate whihc exception is thrown by method
+
+
+enums
+-----
+- list of predefined constants
+- enum keyword used to describe Enum Type
+- we can define a constructor
+- enum constants are implicitly static and final
+- can be used in switch case
+- have '==' and 'equals()' method
+- cannot invoke enum constructor
+
+Functional Interfaces
+---------------------
+- conatins a single abstarct method (SAM interfaces)
+- Runnable, Callable
+- annotated with @FunctionalInterface, optional
+
+Marker Interface
+----------------
+- an interface without any methods or fields
+- Cloneable(java.lang), Serializable(java.io), Remote(java.rmi), RandomAccess(java.util)
+
+Lamda Expressions
+-----------------
+- used to implement functional interfaces
+- 3 components (arg list, arrow token, body)
+
+Predicate Interface
+-------------------
+- helps in unite testing code
+- boolean test(T t)
+
+Method Reference
+----------------
+- introduced in JDK8
+- used in lambda expressions
+- allows a method to be used directly
+- alternate to lambda expressions
+
+via object
+-----------
+String str = "hello";
+Supplier<String> strSupplier=str::toUpperCase
+
+	lamda exp equivalent
+		String str = "hello";
+		Supplier<String> strSupplier=()->str.toUpperCase();
+
+non-static method reference
+----------------------------
+Function<String,String> methodRef=String::toUpperCase;
+	
+	lamda exp equivalent
+		Function<String,String> methodRef=s->s.toUpperCase();
+
+constructor method reference
+----------------------------
+Supplier<List<String>> listSUpplier=ArrayList::new
+
+	lamda exp equivalent
+		Supplier<List<String>> listSUpplier=()->new ArrayList<>()
+
+
+enhanced switch
+---------------
+- introduced in JDK12
+- simplified with lambda style syntax
+- made stable in JDK14
+
+int day = 3;
+String dayOfWeek = switch(day){
+	case1 -> "Monday";
+	case2 -> "Tuesday";
+	case3 -> "Wednesday";
+	default -> "Invalid day";
+}
+	sout(dayOfWeek);
+	
+	
+To perform more than 1 operation, use "yield"	
+
+int day = 3;
+String dayOfWeek = switch(day){
+	case1 -> "Monday";
+	case2 -> "Tuesday";
+	case3 -> {
+		sout("Midweek");
+		yield "Wednesday";
+	}
+	default -> "Invalid day";
+}
+	sout(dayOfWeek);
+	
+Pattern Matching
+---------------	
+Object obj=123;
+String res;
+	if(obj instanceof String){
+		res="Integer: "+i;
+	}
+	else if(obj instanceof String){
+		res="String: "+i;
+	}else{
+		res="Unknown Type";
+	}
+	sout(res);	
+
+This can be simplified with switch	
+
+	Object obj=123;
+	String res=switch(obj){
+		case Integer i-> "Integer: "+i;
+		case String s-> "String: "+s;
+		default -> "Unknown type";
+	}
+		sout(res);
+		
+Stream API
+----------
+- Stream is an Interface
+- found un util.stream
+- introduced in JDK8
+- a stream represents a sequence of elements from a data source
+- it does not store any data
+- once consumed, it cannot be used again
+- used to process collections mostly
+
+
+traversing collections
+- for, for-each loop
+- iterators
+- stream API
+
+reduction operations in streams
+-------------------------------
+average()
+sum()
+max()
+min()
+count()
+
+l.stream().reduce(initial,(sumSoFar,nextEl)->sumSoFar,nextEl);
