@@ -841,4 +841,78 @@ max()
 min()
 count()
 
+reduce()
+	gives a single value, list isn't modified
+collect()
+	modifies/ mutates an existing value
+
 l.stream().reduce(initial,(sumSoFar,nextEl)->sumSoFar,nextEl);
+ 
+
+collect(container_to_capture_result,accumulator_fn(stream_result),combiner(take_2_results_and _combine))
+
+parallel stream
+---------------
+uses Fork Join thread pool (num_of_processors+1 threads)
+Collectors.groupingByConcurrent
+
+nums.parallelStream().forEach(System.out::print); // order not preserved
+nums.parallelStream().forEachOrdered(System.out::print);// order preserved
+
+Date and Time
+-------------
+Calendar 
+--------
+- used since JDK1, before that Date was used
+- present in java.util pkg
+- Calnedar.getInstance()
+
+LocalDate
+---------
+- LocalDate is an immutable date-time obj that represents a date-time
+  often as year month day
+- doesn't store time or time zone
+- included in java.time pkg  
+- thread safe
+- no constructor, final class, all static methods
+
+LocalTime
+---------
+- immutable time
+- viewed as hr-min-sec
+- doesn't represent date/ time zone (like a wall clock)
+- thread safe
+- no constructor, final class, all static methods
+
+LocalDateTime
+-------------
+- immutable time
+- viewed as date-hr-min-sec
+- doesn't represent date/ time zone (like a wall clock)
+- represent instant on a timeline
+- combination of LocalDate + LocalTime
+- final class, no constructor, all static methods
+
+Period
+------
+- represents a quantity or amt of time in terms of yrs, months, adn days
+- supported units are years, months and days
+- represent in java.time.Period
+- immutable and thread safe
+- final class, no constructor, all static fields
+
+DateTimeFormatter
+-----------------
+YYYY-MM-dd
+2020-01-12
+
+MMM/dd/yy
+Jan/12/20
+
+- used for formatting and parsing date-time objects
+- included in java.time.format.DateTimeFormatter
+- class is immutable and thread-safe
+- can use predefined ISO formats as well
+
+Java I/O
+--------
