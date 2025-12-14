@@ -256,7 +256,7 @@ Inheritance
 - - A subclass inherits all public and protected members of its parent
 -   inherited fields can be used like any other fields
 - - you can declare a field in the subclass with the same name as the aprent, this field 
-    hides the supercalss field
+    hides the superclass field
   - inherited methods can be used directly as they are
   - you can override superclass methods in subclass 
   
@@ -307,12 +307,12 @@ this
 - can be used to invodke current class constructor
 - can be passed as an argument in the method call
 - can be passed as an argument in the constructor call
-- can be used to return teh current class instance from the method
+- can be used to return the current class instance from the method
 
 super
 -----
 - this refers to the class its in
-- super referes to the supercalss it inherits
+- super referes to the superclass it inherits
 - this references the constrcutors of its class
 - super references the constrcutors of the superclass it inherits
 
@@ -713,7 +713,7 @@ enums
 
 Functional Interfaces
 ---------------------
-- conatins a single abstarct method (SAM interfaces)
+- conatins a single abstract method (SAM interfaces)
 - Runnable, Callable
 - annotated with @FunctionalInterface, optional
 
@@ -916,3 +916,147 @@ Jan/12/20
 
 Java I/O
 --------
+OutputStream 
+-------------
+- transfer data from pgm to data source
+- abstract class
+- superclass of all classes representing an output stream of bytes
+- moves data in bytes
+- included in java.io pkg
+- ByteArrayOutputStream, FileOutputStream, ObjectOutputStream, PrintStream etc
+
+methods
+-------
+write(int b)
+write(byte[] b)
+write(byte[] b, int offset, int len)
+flush()
+close()
+
+InputStream
+-----------
+- used to get data from data source to pgm
+- abstract class
+- is the superclass of all classes representing input stream of bytes
+- included in java.io
+- FileInputStream, ByteArrayInputStream, ObjectInputStream etc
+
+methods
+-------
+read(int b)
+read(byte[]b)
+read(byte[]b, int off, int len)
+available() : returns estimate of num of bytes available that can be read
+skip(long n): skips and discards n bytes
+mark(int readLimit)
+markSupported()
+reset()
+close()
+
+Writer
+------
+- we can write data to an external source on a char basis
+- abstract class
+- included in java.io pkg
+- BufferedWriter, OutputStreamWriter, CharArrayWriter etc
+
+methods
+-------
+write(int c)
+write(String s)
+write(char[] ch)
+write(String s, int off, int len)
+write(char[] ch, int off, int len)
+
+Reader
+------
+- we can read data from an external data source to the pgm
+- we can read from a src on a char basis
+- abstract class
+- included in java.io pkg
+- BufferedReader, InputStreamReader, CharArrayReader etc
+
+methods
+--------
+read()
+read(char[] ch)
+read(char[] ch, int off, int len)
+skip(long n)
+ready()
+
+Serialization
+-------------
+- process of convertign an object into a byte stream
+- Serialization is crucial for preserving state of an object
+- Serializable is a marker interface
+- present in java.io pkg, must be implemented
+- ObjectOutputStream is used for serialization
+- subclasses of serialized classes are also serialized
+- serializing a sub class doesn't serial the super class of that class
+
+Deserialization
+---------------
+- reverse process of serialization
+- ObjectInputStream is used for deserialization
+- must have a public no-arg constructor
+
+transient
+---------
+- to ignore/ prevent fields from being serialized, mark them as transient
+- if fields in a serializable class belong to a non serializable class, then transient must be applied to these fields,
+  else we get 'Not Serializable Exception' 
+  
+
+Threads
+-------
+- a thread is lightweight process or the smallest unit of execution 
+  within a program
+- in Java, every program starts with at least one thraed known as main thread
+- a program can have multiple threads runnign concurrently, allowing multiptasking within 
+  a single process
+  
+Process
+-------
+	Each process has its own memory space and resources
+
+Threads
+-------
+	Threads share the same memory space within a process, making thme more, lightweight	
+	
+	
+Thread Lifecycle
+-----------------
+New 
+	-> Runnable 
+				-> Running 
+							-> Terminated
+	
+getState(): 
+- returns the state of this thread
+- designed for use in monitoring of system state, not synchronization control
+
+
+synchronization
+---------------
+- controlling access to shared resources
+
+volatile
+--------
+- ensures that all threads see the latest updated value of a variable
+
+High level concurreny APIs
+---------------------------
+no manual synchronization needed
+
+- Executor Framework	
+	submit tasks and the executor service handles the execution
+		ExecutorService
+		ScheduledExecutorService
+		
+- Concurrent Collections
+		handles mulitple threads accessing and modifying data without needign external
+		synchronization
+
+- Future & Callable interface
+		
+- Atomic Variables (thread safe lock free oepration on sinle variables)
