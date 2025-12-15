@@ -1283,4 +1283,49 @@ Stateless Operations:
 
 Thread Overhead:
 - while parallel streams reduces execution tim for large datasets, small datasets may 
-  suffer from thread overhead, making it slower than sequential processing
+  suffer from thread overhead, making it slower than sequential processing 
+  
+  
+  
+JVM and Thread Management
+-------------------------  
+- the JVM is the heart if Java's runtime environment
+- JVM plays a pivotal role in creating,scheduling and managing threads efficiently
+
+
+Thread Lifecycle management:	
+
+- NEW
+- RUNNABLE
+- RUNNING
+- BLOCKED, WAITING, TIMED WAITING
+- TERMINATED
+
+Context switching:
+- allows multiple threads to share CPU time without conflict, creating the illusion of parallelism
+
+Thread Prioritization
+Thread Synchronization
+GC Threads
+ForkJoinPool and Parallelism
+
+How does JVM optimize threads:
+- balances threads across available processors
+- minimizing overhead through efficietn context switching
+- allowing devs to focus on business logic while it handles thread level complexity
+
+Thread Prority
+--------------
+- In Java, every thread has a priority that helps the OS decide the order in which threads should execute
+- they are represented as int values ranging from 1-10
+	Min priority - 1
+	Normal priority - 5
+	Max priority - 10
+
+- Preemptice multitasking
+- Starvation risk	
+- Fairness mechanism
+- Changing priorities
+
+Concurrency Design Patterns
+---------------------------
