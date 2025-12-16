@@ -1,0 +1,1331 @@
+Java 21 (1Z0-830)
+-----------------
+JDK, JRE, JVM
+-------------
+JDK- dev tools (javac compiler, java launcher, jshell(testing), jpackage, java API)
+
+JDK
+	|
+	JRE + dev tools(complier, debugger, etc)
+	|
+	(JVM + libs)
+	
+Variables
+---------
+instance
+static
+local
+
+Data Types
+----------
+Primitive
+
+Boolean
+	boolean - 1 byte (8 bits), [default: false]
+
+Numeric
+	Character
+		char - 2 byte (16 bits), [default: '\u0000'= 0 (ASCII)]
+	Integral
+		Integer
+			byte - 1 byte (8 bits), [default: 0] 
+			short - 2 bytes (16 bits), [default: 0]
+			int - 4 byte (32 bits), [default: 0]
+			long - 8 bytes (64 bits),[default: 0L]
+		Floating Point
+			float - 4 byte (32 bits), [default: 0.0f]
+			double - 8 byte (64 bits), [default: 0.0d]
+
+Non Primitive
+class, enum, interface, string, array 
+
+
+Numbers
+-------
+Decimal -  13 					// 13
+Binary  - 0b1101 				// 13
+Octal - (0-7) - 015 			// 13
+Hexadecimal - (0-9 - A-F) - 0xD	// 13  	
+
+
+Type Conversion
+---------------
+Smaller to Larger - OK
+
+        double a;
+        int b = 20;
+        a = b;
+        System.out.println(a); //20.0
+		
+		automatically converted to double
+		
+Larger to smaller data type (explicit type casting)		
+
+		double a = 20;
+		int b;
+		b = a;
+- This conversion can't be performed automatically 
+  as double is bigger than int
+- To solve this, we need explicit type casting
+  b = (int) a; // type casting
+		
+	types need to be made compatible	
+		
+Operators
+---------
+5+4
+
+5,4 -> operands
++ -> operator		
+		
+Arithmetic Operators
+--------------------
++, -, *, /, %
+
+Assignment Operators (assign RHS to LHS)
+--------------------
+=, +=, -=, *=, /=, %=		
+
+Unary Operators (require only one operand)
+---------------
++, -, ++, --, !
+
+Equality and Relational Operators (check if 2 operands are equal)
+---------------------------------
+==, !=, >, <, >=, <=
+
+Conditional operators (checking multiple conditions together)
+---------------------
+&&, ||, ?:
+
+Bitwise and BitShift Operators
+------------------------------
+& AND
+| INCLUSIVE OR
+^ EXCLUSIVE OR (both different = 1, both same = 0)
+~ NOT Compliment ~0000 = 1111 
+<< x Left shift operator (pointing left)  shift bits to the left (x times)
+>> x Right shift operator (pointing left) shift bits to the right (x times)
+
+char
+----
+we can store only 1 digit for char data type,
+each char has an integer equivalent (use ASCII table)	
+
+
+Expressions/ Statements/ Blocks
+-------------------------------
+expressions make up statements
+statements always end in a semi-colon ;
+blocks are made up of statements enclosed in {}
+
+Arrays
+------
+int[] nums; //preferred
+int nums[];
+
+int[] nums = new int[];
+
+initialization
+--------------
+int[] nums = {1,2,3,4,5};
+int[] nums = new int[]{1,2,3,4,5};
+int[] nums = new int[5]; // fixed, can't be changed later
+
+access
+-------
+nums[2] // 3 3rd element in array
+
+sort
+----
+int[]arr={3,4,5,1,2};
+Arrays.sort(arr);
+
+searching
+---------
+int[]arr={3,4,5,1,2};
+Arrays.binarySearch(arr,5);
+
+if array is sorted, 
+	if num is present in arr => o/p : idx of num
+	if num is NOT present in arr => o/p : negative value order of num in arr
+if arr is NOT sorted	
+	o/p : unpredictable
+	
+multi dimensional array
+-----------------------
+2D arrays
+----------
+int[][] nums=new int[3][4]
+// [rows][cols]
+
+int nums={{1,2,3,4},{5,6,7,8},{9,10,11,12}};
+
+
+Decision making statements
+--------------------------
+if-else
+	if 
+		if(condition){}
+	if else
+		if(condition){}else{}
+	if else if ladder
+		if(){}else if(){} else if(){} else{}
+
+ternary ?:
+
+switch
+
+
+Stack and Heap
+--------------
+Stack
+- It is an area of memeory used at program runtime
+- holds method execution, local variables + primitive data types & ref vars
+- physical space in RAM, allocated to each Thread at runtime
+- LIFO
+- throws StackOverFlowError
+
+Heap
+- It is an area of memeory that is allocated dynamically 
+  at program runtime
+- holds instance vars and objects and ref types
+- no specific order
+- throws OutOfMemoryError
+
+static keyword
+--------------
+variables
+class methods
+interface methods
+block
+class
+import
+
+static method: 
+- belongs to class, not an instance of the class (object)
+- no need to create an object
+- call it using ClassName.staticMethod();
+
+static variables:
+- belongs to class, not an instance of the class (object)
+- no need to create an object
+- use it by invoking ClassName.staticVariable;
+
+static import
+-------------
+- use method without class name
+	before 
+	------
+		Math.pow()
+		Math.min()
+		Math.max()
+	after
+	-----	
+	import static Math.pow;
+	import static Math.min;
+	import static Math.max;
+	import static Math.*;
+	pow();
+	min();
+	max();
+	
+Nested class
+-----------
+Nested class	
+	non-static nested/ inner class
+		- can access all members and methods (static and non-static) of the outer class
+		- can access private vars of the outer class		
+		- types of inner classes :
+			anonymous class
+			local class
+				- the scope of the local class is retricted to the block they are defined in
+				- a local class cannot be instantiated from outside the block where it is created in
+				- from jdk 8, its possible to access non-final local variable of enclosing block in the local class	
+				- has access to the members of its enclosing class		
+				- they are non static as they have to access instance members of enclosing block
+				- from JDK8, a local class inside a method can access method params
+	static nested class
+	- cannot access non static members of outer class 
+	- can access only static members of outer class 
+	- access members not very important	
+	
+	
+Inheritance
+-----------
+- all classes can inherit methods, variables from another class
+- subclass (derived, extended, child class)
+- superclass (base, parent class)
+- except Object, every class has 1 and only 1 direct superclass
+- in absence of explicit superclass, evey class is implicitly a subclass of Object
+- a subclass inherits all memebers (fields, methods, and nested classes) from its superclass
+- constructors aren't members, so they aren't inherited
+- Object is the most general of all classes
+
+- - A subclass inherits all public and protected members of its parent
+-   inherited fields can be used like any other fields
+- - you can declare a field in the subclass with the same name as the aprent, this field 
+    hides the superclass field
+  - inherited methods can be used directly as they are
+  - you can override superclass methods in subclass 
+  
+  
+Types of Inheritance
+--------------------
+- single inheritance
+
+	class  RoadBike extends Bicycle
+	
+- multilevel inheritance
+
+	class Bicycle extends Vehicle
+	class RoadBike extends Bicycle
+
+- hierarchial inheritance
+
+	class RoadBike extends Bicycle
+	class MountainBike extends Bicycle
+	class TabdemBike extends Bicycle
+
+- multiple inheritance (not supported in classes)
+	only in interfaces, Java doesn't support in classes
+	
+- hybrid inheritance (not supported in classes)
+	only in interfaces, Java doesn't support in classes
+	
+Sealed classes
+---------------
+- introduced in jdk15	
+- restrict which classes can extend a class
+- provied more granular control in inheritance
+- sealed ClassA permits ClassB,ClassC,ClassD
+- public, final, sealed, non-sealed
+
+method overriding
+-----------------
+- if methods have same name but different params length - method overloading
+- a method in a subclass that is already defined in the superclass with the 
+	- same name
+	- same paramters
+	- same return type
+	
+this
+----
+- this can be used to refer to current class instance variable
+- can be used to invoke the current class method (implicitly)
+- can be used to invodke current class constructor
+- can be passed as an argument in the method call
+- can be passed as an argument in the constructor call
+- can be used to return the current class instance from the method
+
+super
+-----
+- this refers to the class its in
+- super referes to the superclass it inherits
+- this references the constructors of its class
+- super references the constructors of the superclass it inherits
+
+final
+-----
+- final class
+	Cannot be extended
+- final method
+	Cannot be extended
+- final variable (Constant)
+	Cannot be altered
+	
+	
+Abstraction
+-----------
+abstract class
+--------------
+- It serves as a blueprint for other classes, providing common functionality 
+  and defining abstract methods that must be implemented by its subclasses
+- Cannot be instantiated
+- May contain abstract methods
+- May contain concrete methods
+- Subclasses must implement abstract methods or be declared abstract themselves  
+- Can have constructors, fields, and static/final methods
+- can have final methods, they must be concrete
+- can have all non abstract methods
+- abstract methods can't be private or final
+-  abstract method may not be declared as static
+
+Interface
+---------
+- mechanism to achieve abstraction
+- can only have constructors and methods without a body
+- a java class can implement multiple interfaces
+- cannot instantiate an interface
+- doesn't contain any constructors
+- can't be extended by a class
+- can be inherited from another interface
+- common behaviors that can be implemented by classes
+- cannot have a method body
+- represents a IS-A relationship
+- can have methods and variables
+
+Polymorphism (implicit casting)
+-------------
+static polymorphism: method overloading
+dynamic polymorphism: method overriding
+
+Encapsulation
+--------------
+private fields
+hide data from outside world
+use getters/ setters
+
+
+Anonymous Classes
+-----------------
+don't need a class for implementing an interface
+implementation can be provided with an anonymous class
+
+Records
+-------
+- part of JDK 16
+- simple template based class
+- used to create immutable data containers
+- contains only data fields and methods to access these fields
+- automatically generates hashCode(), equals(), toString()
+- substitute for POJOs 
+- provides a simple and more readable way to create data containers
+
+public record Person(String name, int age){}
+
+
+var keyword
+------------
+- introduced in JDK 10
+- supports local variable type inference (LVTI)
+- can use var to declare variables used in methods or blocks
+- can't be used for class variables
+- can't be used in method params or return types
+- requires an initializer
+- can't assign null without explicit type
+- can't be used for lambda expressions
+
+Wrapper Classes
+---------------
+Primitive			Wrapper
+---------------------------
+byte				Byte
+short				Short
+int 				Integer
+long				Long
+float				Float
+double				Double
+boolean				Boolean
+char				Character
+
+
+primitive -> wrapper
+-------------------
+- use constructors
+	Integer i1 = new Integer(20);
+
+- use static methods
+	Integer i2 = Integer.valueOf(20);
+
+
+wrapper -> primitive
+--------------------
+	Integer i1 = new Integer(20);
+	int val = i1.intValue();
+	
+automatic conversion from primitive to wrapper - autoboxing
+the reverse is autounboxing	
+
+Strings
+-------
+- present in java.lang, not need of explicit import
+
+equality
+--------
+String pool
+------------
+String literal
+- all literals are placed in the string pool
+- if a literal of the same value is already present in the SCP,
+  then the newly created literal references that SCP string
+  
+ e.g: String s1="Java"; // newly creates string in SCP 
+	  String s2="Java"; // references the already existing string in SCP 
+	  String s3="Android"; // new string created in SCP	
+	  
+String object
+------------
+- all objects are placed in the heap memeory
+	  // this craetes a new String object regardless of whether the same string was already present in the SCP	
+      String s4 = new String("Hello"); 
+
+Immutability of Strings
+-----------------------
+- you can't change the object itself, but you can change the reference to the object	
+- string objects are immuatble  
+- once a string object is created its data or state can't be changed but a new 
+  string object is created
+  
+  String msg="Hello";
+  msg.concat("World");
+  sout(msg); // Hello
+  msg = msg.concat("World");
+  sout(msg); // Hello World
+  
+useful methods in String class
+------------------------------  
+toUpperCase(): returns a string in uppercase
+toLowerCase(): returns a string in lowercase
+concat(String s): Adds the string "s" to the end of the other string
+isEmpty(): checks the length of string, returns true if len=0 else false
+equals(Object another): comapres 2 string if they have the same content returns true
+substring(int beginIdx): return substring for given index
+length(): returns length of string
+charAt(int idx): return char value for the particular index
+indexOf(String s):returns index of given string
+equalsIgnoewCase(String s): same as equals,but ignores the case
+startsWith(String s): returns true if the string its applied to starts with "s", else false
+endsWith(String s): returns true if the string its applied to ends with "s", else false
+contains(String s): returns true if the string its applied to contains the given string "s", else false
+trim(): removes leading and trailing spaces from the string to which its applied
+
+StringBuffer
+------------
+- same as String, except its mutable
+- thread safe (slower)
+StringBuffer sb=new StringBuffer("Java");
+sb.appen(" Program");
+sout(sb); // Java Program
+
+StringBuilder
+-------------
+- same as StringBuffer
+- its NOT thread safe (faster)
+
+---------------------------------------------------------------
+			|	String		StringBuffer		StringBuilder
+---------------------------------------------------------------
+Storage Area|	SCP				Heap				Heap			
+Modifiable	|	no				yes					yes
+Performance	|	fast			slow				fast
+---------------------------------------------------------------
+
+Collections
+-----------
+- a collection is simply an object that groups multiple elements into a single unit
+- collections are used to store, retrieve, manipulate and communicate aggregate data
+- they have ready made methods
+- reduces programming efforts
+- increases program speed and quality
+- allows interoperability b/w unrealeted APIs
+
+	array 			vs		 collection
+-------------------------------------------
+- fixed in size				dynamic size
+
+
+Interfaces
+----------
+Collection
+	List
+	Set
+		SortedSet
+	Queue
+	Deque
+	
+Classes
+-------
+List
+	ArrayList
+	LinkedList
+	Vector
+	Stack
+Set
+	HashSet
+	LinkedHashSet
+	TreeMap
+Queue (FIFO)	
+	ProrityQueue (based on priority, natural order)
+Deque	(FIFO, LIFO) both ends
+	ArrayDeque
+	
+Map(I)
+	- not a collection
+	- doesn't have methods of Collection(I), holds (k,v) pairs
+	- classes	
+		HashMap
+		LinkedHashMap
+		TreeMap
+		
+List Interface
+---------------
+- preserves insertion order
+- allows random access
+- just like arrays, but dynamic
+- e.g: ArrayList, LinkedList
+
+useful methods
+--------------
+add()
+remove()
+size()
+set()
+isEmpty()
+contains()
+clear()
+
+List to Array conversion
+-------------------------
+list.toArray()
+list.toArray(T[]a)
+
+Array to List conversion
+-------------------------
+Arrays.asList(arr)
+Collections.addAll(list,arr)
+
+Iterators
+--------
+- an Iterator is a Java cursor
+- Java iterator is an interface
+- used to iterate, traverse, or retrieve a Collection or Stream object's element one by one
+- belongs to java.util package
+- perform read/ remove operation
+- available for entire collections framework
+
+listiterator
+------------
+important methods
+-----------
+next()
+hasNext()
+previous()
+hasPrevious()
+previousIndex()/ nextIndex()
+set()
+add()
+
+Set
+---
+- unpredictable order
+- no duplicates
+- only 1 null elements
+
+LinkedHashSet
+------------
+- same as set
+- maintains insertion order
+
+TreeSet
+-------
+- same as set
+- maintains ascending order
+
+Queue
+-----
+- used to insert elements in FIFO order
+- Queue(I)
+		PriorityQueue
+	Deque(I)	
+		LinkedList
+		
+Deque (Doubley eneded queue) (I)
+-----		
+- add/ remove el from both ends of the queue
+- FIFO/ LIFO can be applied
+- classess: ArrayDeque LinkedList
+
+Map
+---
+HashMap
+-------
+- no insertion order preserved
+- 1 null key, multiple null values
+
+LinkedHashMap
+-------------
+- insertion order preserved
+- 1 null key, multiple null values
+
+TreeMap
+-------
+- maintains natural order/ Compartaor sorting order
+- stores based on SORTED KEYS
+- no null keys, multiple null values
+- no duplicate values
+
+Exception Handling
+------------------
+- exception: sepcial type of error
+- it occurs while executing the pgm
+- if not handled, the pgm can be terminated abruptly
+
+		Error 				 							Exception
+- In java.error pkg								- In java.exception pkg
+- lacking system resources						- because of code
+- imposiible to recover							- possible using try-catch block
+- classified as unchecked type					- classified as checked/ unchecked type
+- StackOverflowError, OutOfMemoryError			- FileNotFoundException, NullPointerException
+
+Exception hierarchy
+--------------------
+Object
+	|
+Throwable
+	|----------------------------------------
+	|										|
+Exception						 		  Error	
+	|		    						  
+    |------------
+	|			|
+Bult-in   	user defined
+	|
+	|----------------	
+	|				|
+Checked				Unchecked
+	
+Exception Types	
+---------------
+Checked Exceptions
+	- checked at compile time 
+	- compile time exception
+	- FileNotFoundException
+
+Unhecked Exceptions
+	- checked at runtime
+	- runtime exception
+	- StackOverFlowError
+
+User defined Exception
+	- custom exceptions/ user defined exception
+	- AccountNotFoundException
+
+throw
+-----
+- throw an exception explicitly
+
+throws
+------
+- use in method defintion to indicate whihc exception is thrown by method
+
+
+enums
+-----
+- list of predefined constants
+- enum keyword used to describe Enum Type
+- we can define a constructor
+- enum constants are implicitly static and final
+- can be used in switch case
+- have '==' and 'equals()' method
+- cannot invoke enum constructor
+
+Functional Interfaces
+---------------------
+- conatins a single abstract method (SAM interfaces)
+- Runnable, Callable
+- annotated with @FunctionalInterface, optional
+
+Marker Interface
+----------------
+- an interface without any methods or fields
+- Cloneable(java.lang), Serializable(java.io), Remote(java.rmi), RandomAccess(java.util)
+
+Lamda Expressions
+-----------------
+- used to implement functional interfaces
+- 3 components (arg list, arrow token, body)
+
+Predicate Interface
+-------------------
+- helps in unite testing code
+- boolean test(T t)
+
+Method Reference
+----------------
+- introduced in JDK8
+- used in lambda expressions
+- allows a method to be used directly
+- alternate to lambda expressions
+
+via object
+-----------
+String str = "hello";
+Supplier<String> strSupplier=str::toUpperCase
+
+	lamda exp equivalent
+		String str = "hello";
+		Supplier<String> strSupplier=()->str.toUpperCase();
+
+non-static method reference
+----------------------------
+Function<String,String> methodRef=String::toUpperCase;
+	
+	lamda exp equivalent
+		Function<String,String> methodRef=s->s.toUpperCase();
+
+constructor method reference
+----------------------------
+Supplier<List<String>> listSUpplier=ArrayList::new
+
+	lamda exp equivalent
+		Supplier<List<String>> listSUpplier=()->new ArrayList<>()
+
+
+enhanced switch
+---------------
+- introduced in JDK12
+- simplified with lambda style syntax
+- made stable in JDK14
+
+int day = 3;
+String dayOfWeek = switch(day){
+	case1 -> "Monday";
+	case2 -> "Tuesday";
+	case3 -> "Wednesday";
+	default -> "Invalid day";
+}
+	sout(dayOfWeek);
+	
+	
+To perform more than 1 operation, use "yield"	
+
+int day = 3;
+String dayOfWeek = switch(day){
+	case1 -> "Monday";
+	case2 -> "Tuesday";
+	case3 -> {
+		sout("Midweek");
+		yield "Wednesday";
+	}
+	default -> "Invalid day";
+}
+	sout(dayOfWeek);
+	
+Pattern Matching
+---------------	
+Object obj=123;
+String res;
+	if(obj instanceof String){
+		res="Integer: "+i;
+	}
+	else if(obj instanceof String){
+		res="String: "+i;
+	}else{
+		res="Unknown Type";
+	}
+	sout(res);	
+
+This can be simplified with switch	
+
+	Object obj=123;
+	String res=switch(obj){
+		case Integer i-> "Integer: "+i;
+		case String s-> "String: "+s;
+		default -> "Unknown type";
+	}
+		sout(res);
+		
+Stream API
+----------
+- Stream is an Interface
+- found un util.stream
+- introduced in JDK8
+- a stream represents a sequence of elements from a data source
+- it does not store any data
+- once consumed, it cannot be used again
+- used to process collections mostly
+
+
+traversing collections
+- for, for-each loop
+- iterators
+- stream API
+
+reduction operations in streams
+-------------------------------
+average()
+sum()
+max()
+min()
+count()
+
+reduce()
+	gives a single value, list isn't modified
+collect()
+	modifies/ mutates an existing value
+
+l.stream().reduce(initial,(sumSoFar,nextEl)->sumSoFar,nextEl);
+ 
+
+collect(container_to_capture_result,accumulator_fn(stream_result),combiner(take_2_results_and _combine))
+
+parallel stream
+---------------
+uses Fork Join thread pool (num_of_processors+1 threads)
+Collectors.groupingByConcurrent
+
+nums.parallelStream().forEach(System.out::print); // order not preserved
+nums.parallelStream().forEachOrdered(System.out::print);// order preserved
+
+Date and Time
+-------------
+Calendar 
+--------
+- used since JDK1, before that Date was used
+- present in java.util pkg
+- Calnedar.getInstance()
+
+LocalDate
+---------
+- LocalDate is an immutable date-time obj that represents a date-time
+  often as year month day
+- doesn't store time or time zone
+- included in java.time pkg  
+- thread safe
+- no constructor, final class, all static methods
+
+LocalTime
+---------
+- immutable time
+- viewed as hr-min-sec
+- doesn't represent date/ time zone (like a wall clock)
+- thread safe
+- no constructor, final class, all static methods
+
+LocalDateTime
+-------------
+- immutable time
+- viewed as date-hr-min-sec
+- doesn't represent date/ time zone (like a wall clock)
+- represent instant on a timeline
+- combination of LocalDate + LocalTime
+- final class, no constructor, all static methods
+
+Period
+------
+- represents a quantity or amt of time in terms of yrs, months, adn days
+- supported units are years, months and days
+- represent in java.time.Period
+- immutable and thread safe
+- final class, no constructor, all static fields
+
+DateTimeFormatter
+-----------------
+YYYY-MM-dd
+2020-01-12
+
+MMM/dd/yy
+Jan/12/20
+
+- used for formatting and parsing date-time objects
+- included in java.time.format.DateTimeFormatter
+- class is immutable and thread-safe
+- can use predefined ISO formats as well
+
+Java I/O
+--------
+OutputStream 
+-------------
+- transfer data from pgm to data source
+- abstract class
+- superclass of all classes representing an output stream of bytes
+- moves data in bytes
+- included in java.io pkg
+- ByteArrayOutputStream, FileOutputStream, ObjectOutputStream, PrintStream etc
+
+methods
+-------
+write(int b)
+write(byte[] b)
+write(byte[] b, int offset, int len)
+flush()
+close()
+
+InputStream
+-----------
+- used to get data from data source to pgm
+- abstract class
+- is the superclass of all classes representing input stream of bytes
+- included in java.io
+- FileInputStream, ByteArrayInputStream, ObjectInputStream etc
+
+methods
+-------
+read(int b)
+read(byte[]b)
+read(byte[]b, int off, int len)
+available() : returns estimate of num of bytes available that can be read
+skip(long n): skips and discards n bytes
+mark(int readLimit)
+markSupported()
+reset()
+close()
+
+Writer
+------
+- we can write data to an external source on a char basis
+- abstract class
+- included in java.io pkg
+- BufferedWriter, OutputStreamWriter, CharArrayWriter etc
+
+methods
+-------
+write(int c)
+write(String s)
+write(char[] ch)
+write(String s, int off, int len)
+write(char[] ch, int off, int len)
+
+Reader
+------
+- we can read data from an external data source to the pgm
+- we can read from a src on a char basis
+- abstract class
+- included in java.io pkg
+- BufferedReader, InputStreamReader, CharArrayReader etc
+
+methods
+--------
+read()
+read(char[] ch)
+read(char[] ch, int off, int len)
+skip(long n)
+ready()
+
+Serialization
+-------------
+- process of convertign an object into a byte stream
+- Serialization is crucial for preserving state of an object
+- Serializable is a marker interface
+- present in java.io pkg, must be implemented
+- ObjectOutputStream is used for serialization
+- subclasses of serialized classes are also serialized
+- serializing a sub class doesn't serial the super class of that class
+
+Deserialization
+---------------
+- reverse process of serialization
+- ObjectInputStream is used for deserialization
+- must have a public no-arg constructor
+
+transient
+---------
+- to ignore/ prevent fields from being serialized, mark them as transient
+- if fields in a serializable class belong to a non serializable class, then transient must be applied to these fields,
+  else we get 'Not Serializable Exception' 
+  
+
+Threads
+-------
+- a thread is lightweight process or the smallest unit of execution 
+  within a program
+- in Java, every program starts with at least one thraed known as main thread
+- a program can have multiple threads runnign concurrently, allowing multiptasking within 
+  a single process
+  
+Process
+-------
+	Each process has its own memory space and resources
+
+Threads
+-------
+	Threads share the same memory space within a process, making thme more, lightweight	
+	
+	
+Thread Lifecycle
+-----------------
+New 
+	-> Runnable 
+				-> Running 
+							-> Terminated
+	
+getState(): 
+- returns the state of this thread
+- designed for use in monitoring of system state, not synchronization control
+
+
+synchronization
+---------------
+- controlling access to shared resources
+
+volatile
+--------
+- ensures that all threads see the latest updated value of a variable
+
+High level concurrency APIs
+---------------------------
+no manual synchronization needed
+
+- Executor Framework	
+	submit tasks and the executor service handles the execution
+		ExecutorService
+		ScheduledExecutorService
+		
+- Concurrent Collections
+		handles mulitple threads accessing and modifying data without needign external
+		synchronization
+
+- Future & Callable interface
+		perform tasks asynchronously and return results
+		
+- Atomic Variables (thread safe lock free oepration on sinle variables)
+
+semaphore
+---------
+- It is a concurrency control mechanism that restricts the number of threads
+  that can access a shared resource at a time
+- It has a number of permits or token, each thread must acquire a permit/ token
+  to access the shared resource 
+- If no permits are available, then thread needs to wait till token is released 
+  by another thread 
+  
+Wait Phase
+----------
+- If all permist are occupied, meaning the resource is in use by max allowed num of threads
+  a thread will wait until a permit becomes available  
+
+Release Phase  
+-------------
+- After a thread finished its task with a shared resource, it releases the permit back to semaphore,
+  signalling that the resource is available to another thread
+
+Interthread communication
+-------------------------
+- A thread pauses execution and waits for anither thread to complete its task
+- wait()
+	It releases the lock and enters a waiting state
+- notify()
+	Wakes up one waiting thread
+- notifyAll()
+	Wakes up all waiting threads
+	
+Advanced Locking Mechanism
+--------------------------
+Reentrant Lock
+- provides an alternative to synchronization blocks
+- it allows a thread to reqcquire the same lock over and over again (reentrancy)
+
+Reentrant ReadWrite Lock
+- it allows multiple threads to read data at the same time (read lock) 
+- only one thread can write data (write locallock)
+- reading operations can be done concurrently
+- writing operations can only be done by one thread
+
+Condition Variables
+-------------------
+- a condition variable is associated with a lock
+- it allows threads to pause their execution (wait) until they are explictly signaled to resume
+- we can make threads wait and signal them when a specific condition is met
+
+- new Condition()
+	await()
+	signal()
+	signalAll()
+	
+- this mechanism provides better control over which threads shoudl proceed making it more
+  advanced than traditional wait() and notify() of Object 
+  
+Thread-safe collections
+-----------------------
+- They help us manage data structures safely in multi-threaded env
+- java provides thread-sae implementations of commonly used collection slke ConcurrentHashMap, CopyOnWriteArrayList, CopyOnWriteLinkedQueue etc
+- java.util.concurrent included a lot of thread safe collection like:
+	- ConcurrentSkipListMap
+	- ConcurrentSkipListSet
+	- ArrayBlockingQueue
+	- PriorityBlockingQueue
+	
+Thread Contention
+-----------------
+- Thread Contention occurs when multiple threads compete for shared 
+  resources such as locks or variables	
+- This can lead to delays as threads wait tyheor turn to access the resource
+- It can significantly degrade performace in highly concuurent applications if not merged properly  
+
+The most common causes of thread contention:
+- Overuse use of synchronized blocks or methods
+- Threads waiting for I/O operations to complete
+- COmpetition for locks in data structures like hashMap or file handlers
+
+To reduce contention:
+- Minimise scope of locks
+- Use concurrent data structures like ConcurrentHashMap
+- Opitimize critical sections of your code
+
+- Contention can lead to race conditions or livelock if synchronization is wrong
+- Contention is competition, race condition is wrong outcome, livelock is no progress despite activity.
+
+Deadlock
+--------
+- Deadlocks occur when two or more threads are stuck waiting for each other to release the 
+  resources they need to proceed
+
+Strategies to avoid deadlocks
+- Avoid nested locks
+- Lock ordering
+- Use timeouts 
+
+Thread safety an immutability
+-----------------------------
+- Thread safety ensures that shared data is accessed and modified by multiple threads in a manner
+  that does not lead to race conditions or data inconsistency
+ - A thread-safe program ensures predictable behavior regardless of the execution order of threads
+ 
+Race Condition:
+- This occurs when threads access shared resources concurrently, and the result depends on the timing of thread execution
+
+Critical Section:
+- A part of the program that accesses shared resources and must be executed by only one thread at a time
+
+Synchronization
+Locks
+Volatile vars
+Atomic vars
+Immutable objects
+
+Immuability
+-----------
+- Immuability is a design principle where the state of an object can't be modified after its created
+- This property inherently ensures thread safety because immuatbale objects ca be shared freely
+  between threads without requiring synchronization or locks
+
+Immuability enusres:
+- Thread Safety  
+- Consistency
+- Ease of Debugging
+- Better Performance
+
+Characteristics of Immuable Objects:
+- Declare class as final
+- Make fields private and final
+- Don't provide setter method
+- Ensure deep copying of mutable fields
+- Provide only getters or methdos that return new instances for updates 
+
+
+Optimizing Thread Pools
+-----------------------
+- A thread pool is a group of pre-instantiated threads that are reused to execute tasks
+- Instead of creating a new thread for every task, tasks are queued and executed by available threads in the pool
+
+Advantages:
+- Reduced Overhead
+- Improved Scalability
+- Task Queueing
+
+Types of Thread Pools:
+
+- FixedThreadPool
+	- creates a thread pool with fixed num of threads
+	- if all tasks are busy, additional tasks wait in a queue until a thread becomes available
+	- apps with steady workload, predictable num of threads needed
+	- e.g: web server servign requests
+
+- CachedThreadPool
+	- creates threads as needed but reuses previously created threads ig they happen to be available
+	- threads idel for more than 60s are terminated
+	- e.g: short lived async tasks with unpredictable loads/ batch jobs
+
+- SingleThreadExecetor
+	- single thread executor creates a single thread worker thread to process tasks sequentially so tasks are 
+	  executed one after another in the order that they are submitted
+	- very sueful for tasks that need to be executed serially, ensuring thread safe execution
+	- simplified synchronization, as only one thread is active
+
+- ScheduledThreadPool
+	- repeated/ delay tasks execution
+	- e.g: periodically refreshing cached data from a remote server
+
+- WorkStealingPool
+	- it creates threads that dynamically steal work from other threads queues when idle
+	- it uses the Fork Join pool under the hood, so teh work stealing is actually best suited
+	  for tasks that can be broken into smaller sub tasks, allowing efficient resource utilization 
+	  - e.g: parallel processing large data sets
+	  
+Classes and Interfaces
+----------------------
+- Executor interface 
+- ExecutorService interface 
+	Future submut(Callable/Runnable)
+- Callable interface
+- Future interface	
+- Executors class
+
+- We must optimize thread pool to prevent over-provisioning of threads, which can lead to CPU thrashing, 
+  and to avoid too few threads, which might underutilize system resources
+
+How to optimize:
+- Chooing Right Type
+- Calculating Optimal Thread Pool Size  
+	- CPU bound tasks
+		these use fewer threads to amtch the num of available CPU cores
+	- I/O bound tasks
+		use more threads to handle delays during I/O
+- Setting Task Timeout  
+- Monitoring Performance  
+  
+Parallel Streams
+----------------
+- It is a feature introduced in Java 8
+- It improves performace by utilzing multiple threads of process a collecton of data concurrently
+
+Parallelism:
+- It divides the elements of a collection into chunks
+
+ForJoinPool:
+- Parallel Stream uses a common ForJoinPool which us a thread pool 
+  designed for parallel processing
+- pool size= num_of_processors - 1  
+
+Stateless Operations:
+- parallel streams works best with stateless and non-blocking operations
+
+Thread Overhead:
+- while parallel streams reduces execution tim for large datasets, small datasets may 
+  suffer from thread overhead, making it slower than sequential processing 
+  
+  
+  
+JVM and Thread Management
+-------------------------  
+- the JVM is the heart if Java's runtime environment
+- JVM plays a pivotal role in creating,scheduling and managing threads efficiently
+
+
+Thread Lifecycle management:	
+
+- NEW
+- RUNNABLE
+- RUNNING
+- BLOCKED, WAITING, TIMED WAITING
+- TERMINATED
+
+Context switching:
+- allows multiple threads to share CPU time without conflict, creating the illusion of parallelism
+
+Thread Prioritization
+Thread Synchronization
+GC Threads
+ForkJoinPool and Parallelism
+
+How does JVM optimize threads:
+- balances threads across available processors
+- minimizing overhead through efficietn context switching
+- allowing devs to focus on business logic while it handles thread level complexity
+
+Thread Prority
+--------------
+- In Java, every thread has a priority that helps the OS decide the order in which threads should execute
+- they are represented as int values ranging from 1-10
+	Min priority - 1
+	Normal priority - 5
+	Max priority - 10
+
+- Preemptice multitasking
+- Starvation risk	
+- Fairness mechanism
+- Changing priorities
+
+Concurrency Design Patterns
+---------------------------
