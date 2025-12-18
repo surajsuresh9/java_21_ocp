@@ -1329,3 +1329,134 @@ Thread Prority
 
 Concurrency Design Patterns
 ---------------------------
+- provide solutions to problems that arise in multi-threaded programming
+- these patterns aim to enhance the efficiency, safety, and scalability of concirrent systems by 
+  standardizing teh way threads interact and manage shared resources
+
+Design Patterns
+---------------
+Thread Per Message Pattern
+	- a new thread gets creatd for every new req/ msg
+	- simple to implment nad useful for tasks that ate lightweight and independant
+	- simplifies task handling by associating one thread with one request
+	- suitable for short-lived, infrequent tasks
+	- might cause performance issues under heavy loads dur to teh oberhaed of thread creation
+	  and destruction 
+	- resource intensive as each thread consumes memeory 
+
+Worker Thread Pattern
+	- A fixed number of threads is created, and tasks are assigned to these threads
+	- tasks are queued and threads process them sequentailly
+	- efficeint use of resources because threads are resued
+	- eliminates the overhead of freaquent thread creation/destrcution
+	- tasks may have to wait in a queue if all threads are busy
+	- implementing task prioritization or fairness may add complexity
+
+Producer Consumer Pattern
+	- Producer: 
+		- adds data/tasks to shared buffer
+	- Consumer:
+		- processes tasks/data from shared buffer
+	- a blocking queue or similar structure is typically used for synchronization
+	- this pattern decouples task creation and processing
+	- it also allows multiple producers and consuemrs to work concurrently
+	- it requires careful synchronization to avoid deadlocks and data corruption
+	- its performance may depend on the size of teh buffer and the relative speeds of producers 
+	  and consumers
+	  
+Handling Exception in Threads
+-----------------------------
+- in multithreaded apps, exception handling plays a crucial role in ensuring system reliability
+- threads operate independently, so any unhandled exception in a thread will terminate that thread without notifyign the main thread.
+- this can lead to incomplete processing, resouce leaks or even inconsistent system states  
+
+
+Advanced locking mechanism
+--------------------------
+- in multi threaded programming, efficient thread synchronization is crucial to enusre 
+  data consistency and performance
+- while thread synchronization mechanism such as synchronized blocks and methods are simple and effective, they can sometimes be too 
+  restrictive, leading to thread contention and reduced performance
+- advanced locking mechanisms in Java provide greater flexibility and control over thread synchronization   
+
+ReentrantLock
+-------------
+	- included in java.util.concurrent.locks pkg
+	- unlike synchronized, it allows explicit locking and unlocking
+	- fairness
+		- ensure that locks are granted to threads in the order they request them
+	- interruptibility
+		- allows threads to be interrupted while waiting for a lock
+	- try lock
+		- attempts to acquire a lock only if it is available
+
+ReadWriteLock
+-------------
+	- allows multiple threads to read a resource simultaneously(shared lock)
+	- it ensures that only one thread can write to the resourec(exclusive lock)
+	- it improves performance in scenarios where reads are more frequent than writes
+
+StampedLock
+-----------
+	- it is a versatile and high-performance lockign mechanism intriduced in JDK8
+	- it combines deatures of ReadWriteLock with advanced optimizations to handle scenarios
+	  where reads significantly outnumber writes
+	
+	- stamp based locking
+		- it has 3 types of locking:
+			write lock
+			----------
+				- acquired exclusively by 1 thread, similar to standard lock
+				- ensures no other thread can read or wrote while the lock is held 
+			
+			read lock
+			---------
+				- allows multiple threads to read simultaneously
+				- blocks if a write lock is held
+			
+			optimistic read
+			---------------
+				- non-blocking read hat does not prevent writers
+				- suitable for quick, low-risk read operations
+				- must validate the stamp to ensure data consistency
+				- this is the most unique feature of stamped lock	
+				  this feature allows a thread to read shared data whithout acquiring a traditional lock	
+				- if a write operation occurs during the optimistic read, the read must be validated using the validate() method
+				  to ensure consistency
+				- manual unlocking
+					- stamped lock does not implement Lock interface
+					  - so doesn't support try-with-resources
+					  - user must explicity unlock the lock using the stamp
+					
+How StampedLock works
+---------------------		
+- the StampedLock keeps track of an internal stamp counter
+- when a lock is acquired (write, read, or optimistic read), the stamp counter increases
+- write operations increment the counter significantly, invalidating all optimistic reads
+- this mechanism ensures taht optimistic readers can detect any concurreny writes
+
+Advantages of StampedLock
+-------------------------
+- Improved Performance
+	- optimistic reading reduces contention, especially in read-heavy scenarios
+	- threads don't need to block each other unless absolutely necessary
+- Fine-Grained Control
+	- the stamp-based approach allows for greater flexibility in managing lock states
+- High Throughput
+	- ideal for systems with a high volume of reads and infrequent writes
+	
+Limitation of StampedLock
+-------------------------
+- Manual Management
+	- requires careful handling of stamps, as forgettign to unlock or validate can lead to deadlocks or inconsistent data
+- No Fairness
+	- unlike ReentrantLock, StampedLock does not support fairness, so threads may experience starvation under heavy contention
+- Optimistic Read Limitations
+	- if the system frequently switches between reads and writes, optimistic reads may often fail validation, reducing their benefits
+	
+Use Cases of StampedLock
+------------------------
+- Read Dominant Workloads
+	- apps where reads are significantly more frequent tahn writes, such as caching or reporting systems
+- Low COntention Scenarios
+	- situations where blocking is undesirable or uncessary, such as multi-threaded simulations
