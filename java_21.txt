@@ -1460,3 +1460,48 @@ Use Cases of StampedLock
 	- apps where reads are significantly more frequent tahn writes, such as caching or reporting systems
 - Low COntention Scenarios
 	- situations where blocking is undesirable or uncessary, such as multi-threaded simulations
+	
+	
+	
+Multithreaded Web Server
+------------------------
+Thread Per Request Model
+Concurrency Challenges
+	- Synchronization
+	- Scalability
+Thread Pool
+Socket Programming
+
+Real time systems
+------------------
+Socket programming
+	- a socket represents an endpoint for communication between 2 devices
+	- communication is achieved using TCP ensuring reliabel data transmission
+
+Multi-threading
+	- each client is handled by a separate thread on the server ro enable simultaneous communication
+	  between multiple users
+	
+Broadcasting Messages
+	- messages from one client are broadcast to all connected clients, allowing group communication
+
+Concurrency Handling
+	- ensuring that multiple clients can read adn wrote messages without conflict requires careful thread management and synchronization
+	
+Key Components
+---------------
+Server
+	- listens to incoming connections and manages active clients
+	- broadcasts messages to all connected clients
+
+Client
+	- connects to the server and sends/ receives messages in real time
+
+Shared Resource
+	- a list or set of active client connections to broadcast messages effectively
+	
+	
+Tools and Testing
+-----------------	
+Thread Debugging tools
+----------------------
