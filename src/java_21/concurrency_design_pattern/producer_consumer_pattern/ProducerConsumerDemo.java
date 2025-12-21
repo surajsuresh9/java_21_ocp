@@ -1,4 +1,4 @@
-package java_21.concurrency_design_pattern.producer_consumer_patter;
+package java_21.concurrency_design_pattern.producer_consumer_pattern;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
